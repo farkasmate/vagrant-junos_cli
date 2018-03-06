@@ -1,8 +1,11 @@
+/Gemfile.lock
 /.bundle/
+/.vagrant/
 /.yardoc
 /_yardoc/
 /coverage/
 /doc/
+/example/.vagrant/
 /pkg/
 /spec/reports/
 /tmp/

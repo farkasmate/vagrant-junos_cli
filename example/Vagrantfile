@@ -1,0 +1,23 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure('2') do |config|
+  config.ssh.insert_key = false
+
+  config.vm.define 'vqfx' do |vqfx|
+    vqfx.vm.hostname = 'vqfx'
+    vqfx.vm.box = 'juniper/vqfx10k-re'
+    vqfx.vm.synced_folder '.', '/vagrant', disabled: true
+
+    # Management port (em1 / em2)
+    vqfx.vm.network 'private_network', auto_config: false, nic_type: '82540EM', virtualbox__intnet: 'reserved-bridge'
+    vqfx.vm.network 'private_network', auto_config: false, nic_type: '82540EM', intnet: 'reserved-bridge'
+
+    # (em3  em4)
+    (1..2).each do |_seg_id|
+      vqfx.vm.network 'private_network', auto_config: false, nic_type: '82540EM', intnet: 'segment'
+    end
+
+    config.vm.provision 'junos_cli', path: 'provision.cmd'
+  end
+end

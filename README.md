@@ -50,7 +50,7 @@ Note the `provision.cmd` file, referenced in the provisioner.
 This is where your CLI commands should go.
 
 ```
-configure
+configure private
 set interfaces em3 unit 0 family inet address 10.0.0.1/24
 commit
 exit

@@ -23,8 +23,8 @@ $ vagrant plugin install vagrant-junos_cli
 Note: When using the plugin with vSRX, the following configuration must be set in the Vagrantfile.
 
 ```
-config.ssh.username = “vagrant”
-config.ssh.private_key_path = “~/.vagrant.d/insecure_private_key”
+config.ssh.username = "vagrant"
+config.ssh.private_key_path = "~/.vagrant.d/insecure_private_key"
 ```
 
 ## Quick Start

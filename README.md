@@ -12,6 +12,21 @@ Install using standard Vagrant plugin installation methods.
 $ vagrant plugin install vagrant-junos_cli
 ```
 
+## Tested vagrant boxes
+
+### vQFX
+- juniper/vqfx10k-re
+
+### vSRX
+- juniper/ffp-12.1X47-D15.4
+
+Note: When using the plugin with vSRX, the following configuration must be set in the Vagrantfile.
+
+```
+config.ssh.username = “vagrant”
+config.ssh.private_key_path = “~/.vagrant.d/insecure_private_key”
+```
+
 ## Quick Start
 
 After installing the plugin you need to obtain a Junos box image.

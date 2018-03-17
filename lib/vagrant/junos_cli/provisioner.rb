@@ -24,6 +24,12 @@ module Vagrant
               raise Vagrant::Errors::SSHNotReady if info.nil?
             end
 
+            user = info[:username]
+            comm.sudo("chown -R #{user} #{config.upload_path}",
+                      error_check: false)
+
+            comm.upload(path.to_s, config.upload_path)
+
             if config.name
               @machine.ui.detail(I18n.t('vagrant.provisioners.shell.running',
                                         script: "script: #{config.name}"))
@@ -44,7 +50,7 @@ if [ ! -d ~/.vagrant-junos_cli/bin ]; then\
   source ~/.cshrc;\
 fi'"
 
-            cli_oneliner = format('/usr/sbin/cli -c "%s"', File.read(path).tr("\n", ';').gsub(/;+/, ';'))
+            cli_oneliner = "/usr/sbin/cli -f #{config.upload_path}"
 
             [prepare, cli_oneliner].each do |command|
               comm.execute(

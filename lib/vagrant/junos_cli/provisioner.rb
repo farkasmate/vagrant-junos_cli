@@ -13,7 +13,7 @@ module Vagrant
       protected
 
       def provision_junos_cli
-        @machine.config.ssh.shell = 'start shell'
+        @machine.config.ssh.shell = 'start shell' unless @machine.config.ssh.username == 'root'
 
         with_script_file do |path|
           @machine.communicate.tap do |comm|
@@ -47,12 +47,13 @@ if [ ! -d ~/.vagrant-junos_cli/bin ]; then\
   /bin/ln -s /bin/echo ~/.vagrant-junos_cli/bin/printf;\
   /bin/ln -s /bin/echo ~/.vagrant-junos_cli/bin/export;\
   /bin/echo setenv PATH \\~/.vagrant-junos_cli/bin:\\$PATH >> ~/.cshrc;\
-  source ~/.cshrc;\
 fi'"
 
             cli_oneliner = "/usr/sbin/cli -f #{config.upload_path}"
 
-            [prepare, cli_oneliner].each do |command|
+            clean_up = "/bin/rm #{config.upload_path}"
+
+            [prepare, cli_oneliner, clean_up].each do |command|
               comm.execute(
                 command,
                 sudo: false,

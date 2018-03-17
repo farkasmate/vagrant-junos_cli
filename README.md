@@ -61,5 +61,5 @@ Run `vagrant up` and the new box is getting created with the address configured.
 ## Configuration
 
 Junos CLI provisioner accepts most parameters available for the [Shell provisioner](https://www.vagrantup.com/docs/provisioning/shell.html).
-Do not pass `args`.
+Do not pass `args` or `env`.
 

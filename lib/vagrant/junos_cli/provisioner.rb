@@ -53,7 +53,12 @@ fi'"
 
             clean_up = "/bin/rm #{config.upload_path}"
 
-            [prepare, cli_oneliner, clean_up].each do |command|
+            stages = []
+            stages << prepare unless config.skip_prepare
+            stages << cli_oneliner
+            stages << clean_up unless config.skip_cleanup
+
+            stages.each do |command|
               comm.execute(
                 command,
                 sudo: false,

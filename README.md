@@ -60,6 +60,10 @@ Run `vagrant up` and the new box is getting created with the address configured.
 
 ## Configuration
 
-Junos CLI provisioner accepts most parameters available for the [Shell provisioner](https://www.vagrantup.com/docs/provisioning/shell.html).
+Junos CLI provisioner accepts most options available for the [Shell provisioner](https://www.vagrantup.com/docs/provisioning/shell.html).
 Do not pass `args` or `env`.
 
+### Extra options
+
+- `skip_cleanup` (boolean) - Do not clean up script uploaded to `upload_path` after execution.
+- `skip_prepare` (boolean) - Do not try to fix `print` and `export` commands in the box. Provisioning output might get omitted.

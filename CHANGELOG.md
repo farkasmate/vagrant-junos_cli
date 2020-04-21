@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.1.0
+
+- Add `skip_cleanup` option
+- Add `skip_prepare` option
+
 ## 1.0.2
 
 - Update vulnerable Rake dependency

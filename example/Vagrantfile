@@ -14,10 +14,8 @@ Vagrant.configure('2') do |config|
     vqfx.vm.network 'private_network', auto_config: false, nic_type: '82540EM', intnet: 'reserved-bridge'
 
     # (em3  em4)
-    (1..2).each do |_seg_id|
-      vqfx.vm.network 'private_network', auto_config: false, nic_type: '82540EM', intnet: 'segment'
-    end
+    2.times { vqfx.vm.network 'private_network', auto_config: false, nic_type: '82540EM', intnet: 'segment' }
 
-    config.vm.provision 'junos_cli', path: 'provision.cmd'
+    config.vm.provision 'junos_cli', path: 'provision.cmd', skip_prepare: false
   end
 end
